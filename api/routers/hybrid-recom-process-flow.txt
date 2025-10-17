@@ -1,0 +1,31 @@
+Input: movie_title = "Toy Story", top_n = 3
+
+
+Find "Toy Story":
+idx = 0 (assuming "Toy Story" is the first movie in movie_titles).
+target_genres = [1, 0, 1, 0] (Action, Comedy).
+
+
+Calculate Jaccard Similarity:
+Compare "Toy Story" with all other movies.
+Output: [(1, 0.3), (2, 0.8), (3, 0.5), ...] (movie index, similarity).
+
+
+Get Top Candidates:
+Sorted similarities: [(0, 1.0), (2, 0.8), (3, 0.5), ...].
+Exclude "Toy Story" itself and take top 6 candidates: [2, 3, 1, ...].
+
+
+Predict Ratings with SVD:
+For each candidate, predict the rating for uid=0 as this is for generic user:
+svd_model.predict(uid=0, iid=3).est = 4.5
+svd_model.predict(uid=0, iid=4).est = 3.8
+------------------------
+Output: [(2, 4.5), (3, 3.8), (1, 3.2), ...].(movie idx, rating)
+2=movie and 4.5=rating
+------------------------
+
+
+Return Top-3 Recommendations:
+Sorted by rating: [(2, 4.5), (3, 3.8), (1, 3.2)].
+Movie titles: ["Incredibles", "Finding Nemo", "Monsters Inc"].

@@ -1,1 +1,10 @@
+scikit-surprise
+numpy==1.26.4
+scikit-learn
+fuzzywuzzy
+streamlit
+requests
+uvicorn
+fastapi
 pandas
+fsspec
