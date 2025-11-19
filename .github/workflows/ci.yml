@@ -44,7 +44,7 @@ jobs:
 
       #Validate Streamlit import
       - name: Validate Streamlit Import
-        run: python ci_scripts/streamlit.py
+        run: python ci_scripts/check_streamlit.py
 
       #Validate ML models load
       - name: Validate ML Models Load
