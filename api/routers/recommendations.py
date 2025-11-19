@@ -3,8 +3,8 @@ import numpy as np
 from typing import List
 from fastapi import APIRouter, HTTPException
 #try to find closest match
-from fuzzywuzzy import fuzz
-import pandas as pd
+from fuzzywuzzy import fuzz #type: ignore
+import pandas as pd #type: ignore
 #load the ratings data for fallback popular movie recommendations
 df = pd.read_csv('E://Coding/ML_projects/Movie-Recommendation-System/data/processed/cleaned_data_final.csv')
 
