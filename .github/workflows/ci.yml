@@ -1,0 +1,51 @@
+name: CI Quality Check
+
+on:
+  push:
+    branches: ["development"]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      #Checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      #Set up Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      #Install dependencies
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      #Lint (flake8)
+      - name: Lint (flake8)
+        run: |
+          pip install flake8
+          flake8 .
+
+      #Type checking (mypy)
+      - name: Type Check (mypy)
+        run: |
+          pip install mypy
+          mypy api/ web/
+
+      # Validate FastAPI import
+      - name: Validate FastAPI Import
+        run: python ci_scripts/fastapi.py
+
+      #Validate Streamlit import
+      - name: Validate Streamlit Import
+        run: python ci_scripts/streamlit.py
+
+      #Validate ML models load
+      - name: Validate ML Models Load
+        run: python ci_scripts/models.py
