@@ -40,7 +40,7 @@ jobs:
 
       # Validate FastAPI import
       - name: Validate FastAPI Import
-        run: python ci_scripts/fastapi.py
+        run: python ci_scripts/check_fastapi.py
 
       #Validate Streamlit import
       - name: Validate Streamlit Import
