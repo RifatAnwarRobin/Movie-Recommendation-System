@@ -1,9 +1,11 @@
-import os, pickle
+import sys, os, pickle
+
+sys.path.append(os.getcwd())
 
 files = [
     "core/ml_models/movie_genres.pkl",
     "core/ml_models/movie_recom_svd_model.pkl",
-    "core/ml_models/movie_titles.pkl"
+    "core/ml_models/movie_titles.pkl",
 ]
 
 for f in files:
