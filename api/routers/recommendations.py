@@ -5,18 +5,22 @@ from fastapi import APIRouter, HTTPException
 #try to find closest match
 from fuzzywuzzy import fuzz #type: ignore
 import pandas as pd #type: ignore
+
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 #load the ratings data for fallback popular movie recommendations
-df = pd.read_csv('E://Coding/ML_projects/Movie-Recommendation-System/data/processed/cleaned_data_final.csv')
+df = pd.read_csv(os.path.join(BASE_DIR, "data/processed/cleaned_data_final.csv"))
 
 #loading models and prepared data
 try:
-    with open('E://Coding/ML_projects/Movie-Recommendation-System/core/ml_models/movie_recom_svd_model.pkl', 'rb') as f:
+    with open(os.path.join(BASE_DIR, "core/ml_models/movie_recom_svd_model.pkl"), 'rb') as f:
         svd_model = pickle.load(f)
 
-    with open('E://Coding/ML_projects/Movie-Recommendation-System/core/ml_models/movie_genres.pkl', 'rb') as f:
+    with open(os.path.join(BASE_DIR, "core/ml_models/movie_genres.pkl"), 'rb') as f:
         movie_genres = pickle.load(f)
 
-    with open('E://Coding/ML_projects/Movie-Recommendation-System/core/ml_models/movie_titles.pkl', 'rb') as f:
+    with open(os.path.join(BASE_DIR, "core/ml_models/movie_titles.pkl"), 'rb') as f:
         movie_titles = pickle.load(f)
 except Exception as e:
     raise RuntimeError(f"Failed to load models: {e}")
